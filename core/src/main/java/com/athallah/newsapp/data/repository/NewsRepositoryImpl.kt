@@ -37,19 +37,6 @@ class NewsRepositoryImpl(
         }
     }
 
-    override fun getEverything(pageNumber: Int): Flow<ResultState<List<ArticlesItemEverything>>> = flow {
-        emit(ResultState.Loading)
-        try {
-            val response = apiService.getEverything(query = "a", pageNumber)
-            val data = response.body()?.toEverything()
-            if (data != null) {
-                emit(ResultState.Success(data))
-            }
-        } catch (e: Exception){
-            emit(ResultState.Error(e))
-        }
-    }
-
     override fun getEverythingPaging(pageNumber: Int): Flow<PagingData<ArticlesItemEverything>> {
         return Pager(
             config = PagingConfig(pageSize = 10, prefetchDistance = 1, initialLoadSize = 10),

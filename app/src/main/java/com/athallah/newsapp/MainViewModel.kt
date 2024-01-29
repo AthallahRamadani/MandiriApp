@@ -23,9 +23,7 @@ class MainViewModel(
 
     private var country = "us"
     var category : String? = null
-
     private var pageNumber = 1
-
     private var isAutoUpdateEnabled = false
 
     fun getHeadline() {
@@ -35,11 +33,9 @@ class MainViewModel(
             }
         }
     }
-
     fun getEverythingPagingData(): Flow<PagingData<ArticlesItemEverything>> {
         return newsRepository.getEverythingPaging(pageNumber)
     }
-
 
     fun startAutoUpdate() {
         viewModelScope.launch {
@@ -49,7 +45,6 @@ class MainViewModel(
             }
         }
     }
-
     fun stopAutoUpdate() {
         isAutoUpdateEnabled = false
     }

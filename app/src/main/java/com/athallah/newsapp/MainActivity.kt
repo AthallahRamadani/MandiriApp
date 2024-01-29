@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity(), HeadlineAdapter.HeadlineItemClickListe
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var headlineAdapter: HeadlineAdapter
-
-
     private lateinit var everythingPagingAdapter: EverythingAdapterPaging
 
     private val viewModel: MainViewModel by viewModel()
@@ -88,19 +86,16 @@ class MainActivity : AppCompatActivity(), HeadlineAdapter.HeadlineItemClickListe
         binding.rvLatestNews.isVisible = false
         binding.rvAllNews.isVisible = false
     }
-
     private fun showLoading(isLoading: Boolean) {
         binding.cpiHeadline.isVisible = isLoading
         binding.rvLatestNews.isVisible = !isLoading
     }
-
     private fun setupRecyclerView() {
         headlineAdapter = HeadlineAdapter(emptyList(), this)
         everythingPagingAdapter = EverythingAdapterPaging { articlesItemEverything ->
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(articlesItemEverything.url))
             startActivity(intent)
         }
-
         binding.rvLatestNews.apply {
             adapter = headlineAdapter
             layoutManager =
@@ -110,13 +105,11 @@ class MainActivity : AppCompatActivity(), HeadlineAdapter.HeadlineItemClickListe
             val pagerSnapHelper = PagerSnapHelper()
             pagerSnapHelper.attachToRecyclerView(this)
         }
-
         binding.rvAllNews.apply {
             adapter = everythingPagingAdapter
             layoutManager =
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
         }
-
         binding.rvAllNews.adapter =
             everythingPagingAdapter.withLoadStateFooter(loadingAdapter)
     }
@@ -125,7 +118,6 @@ class MainActivity : AppCompatActivity(), HeadlineAdapter.HeadlineItemClickListe
         val chipGroup = binding.cgCategory
         for (i in 0 until chipGroup.childCount) {
             val chip = chipGroup.getChildAt(i) as Chip
-
             chip.setOnClickListener {
                 binding.ivReset.visibility = View.VISIBLE
                 // Reset color for all chips
@@ -133,10 +125,8 @@ class MainActivity : AppCompatActivity(), HeadlineAdapter.HeadlineItemClickListe
                     val otherChip = chipGroup.getChildAt(j) as Chip
                     otherChip.setChipBackgroundColorResource(R.color.chip_unselected_color)
                 }
-
                 // Change color for the clicked chip
                 chip.setChipBackgroundColorResource(R.color.chip_selected_color)
-
                 val category = chip.text.toString()
                 viewModel.category = category
                 viewModel.getHeadline()
@@ -144,7 +134,6 @@ class MainActivity : AppCompatActivity(), HeadlineAdapter.HeadlineItemClickListe
                 binding.rvLatestNews.scrollToPosition(0)
             }
         }
-
         binding.ivReset.setOnClickListener {
             // Reset color for all chips
             for (i in 0 until chipGroup.childCount) {
@@ -153,11 +142,8 @@ class MainActivity : AppCompatActivity(), HeadlineAdapter.HeadlineItemClickListe
             }
             // Reset category
             viewModel.category = null
-
             binding.ivReset.visibility = View.GONE
-
             viewModel.getHeadline()
-
             binding.rvLatestNews.scrollToPosition(0)
         }
     }
