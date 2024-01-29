@@ -1,11 +1,6 @@
 package com.athallah.newsapp.data.model
 
-data class News(
-    val articles: List<ArticlesItem>,
-    val status: String,
-    val totalResults: Int
-)
-data class ArticlesItem(
+data class ArticlesItemEverything(
     val source: Source,
     val author: String?,
     val title: String,
@@ -20,7 +15,3 @@ data class ArticlesItem(
         val name: String
     )
 }
-
-
-
-

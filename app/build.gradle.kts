@@ -83,4 +83,14 @@ dependencies {
     implementation ("org.ocpsoft.prettytime:prettytime:5.0.4.Final")// time conversion
     implementation ("androidx.recyclerview:recyclerview-selection:1.1.0")
 
+    //paging
+    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
+    implementation("androidx.paging:paging-common-ktx:3.2.1")
+
+    implementation("com.squareup.picasso:picasso:2.8")
+
+    //coil photo online loader
+    implementation("io.coil-kt:coil:2.5.0")
+
+
 }
